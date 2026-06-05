@@ -11,7 +11,6 @@ func main() {
 
 }
 
-
 func created() {
 
 	  bin := bins.Bin{
