@@ -3,6 +3,7 @@ package main
 import (
 	  "fmt"
 	  "project/bins"
+
       "time"
 )
 
@@ -21,6 +22,7 @@ func created() {
 		Name:      "nonname",
 	 }
 
-	 fmt.Println(bin)
+	 fmt.Println("you data",bin)
+	 
 	
 }
