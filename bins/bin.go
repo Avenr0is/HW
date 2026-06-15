@@ -4,10 +4,10 @@ import "time"
 
 
 type Bin struct {
-	Id        string
-	Private   bool
-	CreatedAt time.Time
-	Name      string
+	Id        string `json:"id"`
+	Private   bool   `json:"private"`
+	CreatedAt time.Time `json:"time"`
+	Name      string   `json:name`
 }
 
 type Binlist struct {
