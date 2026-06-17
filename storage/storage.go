@@ -2,33 +2,54 @@ package storage
 
 import (
 	"encoding/json"
-	"errors"
-	"fmt"
-	"os"
 	"project/bins"
+	"os"
 )
 
-func BinSaved(bin bins.Bin) {
 
-	data, err := json.Marshal(bin)
+func BinSaved(file os.File){
 
-	if err != nil {
+	var myBin bins.Bin
+	data, err := json.Marshal(myBin)
 
-		errors.New("Ошибка: сереиализация файла была прервана")
+	if err != nil{
+		return
 	}
 
-	err = os.WriteFile("storage/bins.json", data, 0644)
-
-}
-
-func ReadBin() {
-
-	reded, err := os.ReadFile("storage/bins.json")
-
-	if err != nil {
-
-		errors.New("Ошибка чтения файла")
+	file = *CreatedBinsFl()
+	_, err = file.Write(data)
+	
+	if err != nil{
+		return
 	}
-
-	fmt.Println(string(reded))
+   ReadBin(&file, data)
 }
+
+func ReadBin(file *os.File, data []byte)(strFlData string){
+    
+	readed, err := file.Read(data)
+
+	if err != nil{
+		return 
+	}
+   
+	strFlData = string(readed)
+
+	return strFlData
+}
+
+func CreatedBinsFl()(*os.File){
+     
+	file, err := os.Create("binsfl.json")
+
+	if err != nil{
+
+		return  nil
+	}
+   
+	return file
+}
+
+
+
+
