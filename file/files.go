@@ -3,34 +3,24 @@ package file
 import (
 	"os"
 	"strings"
-	
 )
 
-func ReadFile(name string)(strReded string) {
-
+func ReadFile(name string) (string, error) {
 	readed, err := os.ReadFile(name)
 	if err != nil {
-		return "Не удалось прочитать файл"
+		return "", err
 	}
-
-	strReded = string(readed)
-	return 
+	return string(readed), nil
 }
 
-func WriteFile(name string, data []byte){
-
+func WriteFile(name string, data []byte) error {
 	err := os.WriteFile(name, data, 0664)
-
 	if err != nil {
-		return
+		return err
 	}
-	
-   return 
+	return nil
 }
 
-func FormatCheck(name string) (format bool) {
-
-	format = strings.Contains(name, ".json")
-
-	return format
+func FormatCheck(name string) bool {
+	return strings.Contains(name, ".json")
 }
