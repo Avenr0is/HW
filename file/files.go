@@ -1,31 +1,31 @@
 package file
 
 import (
-	"fmt"
 	"os"
 	"strings"
+	
 )
 
-func ReadFile(name string) {
+func ReadFile(name string)(strReded string) {
 
 	readed, err := os.ReadFile(name)
 	if err != nil {
-		return
+		return "Не удалось прочитать файл"
 	}
 
-	fmt.Println(readed)
+	strReded = string(readed)
+	return 
 }
 
-func WriteFile(name string, data []byte) {
+func WriteFile(name string, data []byte){
 
 	err := os.WriteFile(name, data, 0664)
 
 	if err != nil {
-
 		return
-
 	}
-
+	
+   return 
 }
 
 func FormatCheck(name string) (format bool) {

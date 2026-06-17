@@ -22,20 +22,16 @@ func BinSaved(file os.File){
 	if err != nil{
 		return
 	}
-   ReadBin(&file, data)
+   ReadBin(&myBin, data)
 }
+func ReadBin(myBin *bins.Bin, data []byte) string {
 
-func ReadBin(file *os.File, data []byte)(strFlData string){
+    err := json.Unmarshal(data, myBin)
+    if err != nil {
+        return "Ошибка: не удалось дессериализовать файл"
+    }
     
-	readed, err := file.Read(data)
-
-	if err != nil{
-		return 
-	}
-   
-	strFlData = string(readed)
-
-	return strFlData
+    return string(data)
 }
 
 func CreatedBinsFl()(*os.File){
