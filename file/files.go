@@ -1,41 +1,36 @@
 package file
 
 import (
-	"errors"
 	"os"
-	"fmt"
 	"strings"
+	
 )
 
-func ReadFile(name string) {
+func ReadFile(name string)(strReded string) {
 
 	readed, err := os.ReadFile(name)
-	if err != nil{
-
-	 errors.New("Ошибка чтения файла")
-	 return 
-
-	} 
-
-	fmt.Println(readed)
-}
-
-func WriteFile(name string, data []byte ){
-
-	 err := os.WriteFile(name, data, 0664)
-
-	if err != nil{
-
-		errors.New("Ошибка записи")
-
+	if err != nil {
+		return "Не удалось прочитать файл"
 	}
 
-
+	strReded = string(readed)
+	return 
 }
 
-func FormatCheck(name string)(format bool){
+func WriteFile(name string, data []byte){
 
-	format = strings.Contains(name,".json")
+	err := os.WriteFile(name, data, 0664)
 
- return format
+	if err != nil {
+		return
+	}
+	
+   return 
+}
+
+func FormatCheck(name string) (format bool) {
+
+	format = strings.Contains(name, ".json")
+
+	return format
 }
